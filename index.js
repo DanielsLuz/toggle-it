@@ -1,6 +1,6 @@
 const core = require('toggle-it-core');
 
-function ToggleIt(fetchFunction, parseFunction = (response) => response, options = {default: true}) {
+function ToggleIt(fetchFunction, accessFunction = (response) => response, options = {default: true}) {
   const _core = core({
     options,
   });
@@ -10,7 +10,7 @@ function ToggleIt(fetchFunction, parseFunction = (response) => response, options
   };
 
   fetchFunction().then((data) => {
-    _core.setFeaturesData(parseFunction(JSON.parse(data)))
+    _core.setFeaturesData(accessFunction(JSON.parse(data)))
   });
 
   return {

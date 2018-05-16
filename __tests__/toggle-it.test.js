@@ -15,7 +15,7 @@ describe('#USAGE', () => {
   })
 })
 
-describe('using a response parsing function', () => {
+describe('using a access function', () => {
   test('given a complex object it accesses correctly', () => {
     const JSONresponse = JSON.stringify({
       data: {
