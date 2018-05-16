@@ -6,12 +6,12 @@ const Thenable = (returnValue) => {
   }
 }
 
-describe('usage', () => {
-  test('usage 1', () => {
-    const fetchFunction = () => Thenable(JSON.stringify({ feature1: true }))
+describe('#USAGE', () => {
+  test('usage 1: simplest, given a fetch function only', () => {
+    const fetchFunction = () => Thenable(JSON.stringify({ feature1: false }))
 
-    const toggler = ToggleIt(fetchFunction, (response) => response, {default: false});
-    expect(toggler.isEnabled('feature1')).toBe(true);
+    const toggler = ToggleIt(fetchFunction);
+    expect(toggler.isEnabled('feature1')).toBe(false);
   })
 })
 
