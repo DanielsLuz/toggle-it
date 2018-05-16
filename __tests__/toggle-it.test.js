@@ -13,6 +13,20 @@ describe('#USAGE', () => {
     const toggler = ToggleIt(fetchFunction);
     expect(toggler.isEnabled('feature1')).toBe(false);
   })
+
+  test('usage 2: given a complex response with an access function', () => {
+    const response = {
+      data: {
+        featuresFlags: {
+          feature1: false
+        }
+      }
+    };
+    const fetchFunction = () => Thenable(response);
+
+    const toggler = ToggleIt(fetchFunction, (response) => response.data.featuresFlags);
+    expect(toggler.isEnabled('feature1')).toBe(false);
+  })
 })
 
 describe('using a access function', () => {
