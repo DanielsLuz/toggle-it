@@ -2,7 +2,6 @@ const core = require('toggle-it-core');
 
 function ToggleIt(fetchFunction, options = {default: true}) {
   const _core = core({
-    features: JSON.parse(fetchFunction()),
     options,
   });
 
@@ -10,9 +9,13 @@ function ToggleIt(fetchFunction, options = {default: true}) {
     return _core.on(...arguments);
   };
 
+  fetchFunction().then((data) => {
+    _core.setFeaturesData(JSON.parse(data))
+  });
+
   return {
-    isEnabled,
-  };
+    isEnabled
+  }
 }
 
 module.exports = ToggleIt;

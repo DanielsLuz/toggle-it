@@ -23,6 +23,6 @@
     "jest": "^22.4.3"
   },
   "dependencies": {
-    "toggle-it-core": "^0.0.2"
+    "toggle-it-core": "0.0.3"
   }
 }
