@@ -27,6 +27,28 @@ describe('#USAGE', () => {
     const toggler = ToggleIt(fetchFunction, (response) => response.data.featuresFlags);
     expect(toggler.isEnabled('feature1')).toBe(false);
   })
+
+  test('usage 3: complex response, access function, non-boolean flags', () => {
+    const response = {
+      data: {
+        featuresFlags: {
+          feature1: {
+            userId: 1,
+            userEmail: 'foo@bar.com',
+          }
+        }
+      }
+    };
+    const fetchFunction = () => Thenable(response);
+
+    const accessFunction = (response) => response.data.featuresFlags;
+    const customCheck = (flag) => {
+      return flag.userId === 1 && flag.userEmail === 'foo@bar.com';
+    };
+
+    const toggler = ToggleIt(fetchFunction, accessFunction);
+    expect(toggler.isEnabled('feature1', customCheck)).toBe(true);
+  })
 })
 
 describe('using a access function', () => {
@@ -84,6 +106,13 @@ describe('.isEnabled', () => {
 
       const toggler = ToggleIt(fetchFunction);
       expect(toggler.isEnabled('feature1', () => false)).toBe(false);
+    })
+
+    test('it uses the feature value as parameter', () => {
+      const fetchFunction = () => Thenable({ feature1: true })
+
+      const toggler = ToggleIt(fetchFunction);
+      expect(toggler.isEnabled('feature1', (flag) => !flag)).toBe(false);
     })
   })
 

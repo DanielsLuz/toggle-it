@@ -2933,9 +2933,9 @@ to-regex@^3.0.1, to-regex@^3.0.2:
     regex-not "^1.0.2"
     safe-regex "^1.1.0"
 
-toggle-it-core@0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/toggle-it-core/-/toggle-it-core-0.0.3.tgz#75675bada8c811ca92cb4d881d216c3d31ffdd22"
+toggle-it-core@0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/toggle-it-core/-/toggle-it-core-0.1.0.tgz#3953ef69c23fc0110e52fa597b5e8ba111f08cab"
 
 tough-cookie@>=2.3.3, tough-cookie@^2.3.3, tough-cookie@~2.3.3:
   version "2.3.4"
