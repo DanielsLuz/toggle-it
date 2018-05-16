@@ -21,5 +21,5 @@ Simple example usages can be found at the [tests file](https://github.com/Daniel
 ## TODO
 
 1. (**DONE**) ~~Make it possible to the user to customize how the JSON can be accessed on the response object.~~
-2. Support parametrized custom functions with more complex use cases for the flags.
+2. (**DONE**) ~~Support parametrized custom functions with more complex use cases for the flags.~~
 2. Support non-thenables.
