@@ -10,7 +10,7 @@ function ToggleIt(fetchFunction, accessFunction = (response) => response, option
   };
 
   fetchFunction().then((data) => {
-    _core.setFeaturesData(accessFunction(JSON.parse(data)))
+    _core.setFeaturesData(accessFunction(data))
   });
 
   return {
