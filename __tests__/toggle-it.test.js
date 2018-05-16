@@ -10,7 +10,39 @@ describe('usage', () => {
   test('usage 1', () => {
     const fetchFunction = () => Thenable(JSON.stringify({ feature1: true }))
 
-    const toggler = ToggleIt(fetchFunction, {default: false});
+    const toggler = ToggleIt(fetchFunction, (response) => response, {default: false});
+    expect(toggler.isEnabled('feature1')).toBe(true);
+  })
+})
+
+describe('using a response parsing function', () => {
+  test('given a complex object it accesses correctly', () => {
+    const JSONresponse = JSON.stringify({
+      data: {
+        featureSpecs: {
+          feature1: true
+        }
+      }
+    });
+    const fetchFunction = () => Thenable(JSONresponse);
+    const accessFunction = (response) => response.data.featureSpecs;
+
+    const toggler = ToggleIt(fetchFunction, accessFunction, {default: false});
+    expect(toggler.isEnabled('feature1')).toBe(true);
+  })
+
+  test('given an array response it accesses correctly', () => {
+    const JSONresponse = JSON.stringify({
+      data: [{
+        featureSpecs: {
+          feature1: true
+        }
+      }]
+    });
+    const fetchFunction = () => Thenable(JSONresponse);
+    const accessFunction = (response) => response.data[0].featureSpecs;
+
+    const toggler = ToggleIt(fetchFunction, accessFunction, {default: false});
     expect(toggler.isEnabled('feature1')).toBe(true);
   })
 })
@@ -20,7 +52,7 @@ describe('.isEnabled', () => {
     test('it returns true given a enabled feature', () => {
       const fetchFunction = () => Thenable(JSON.stringify({ feature1: true }))
 
-      const toggler = ToggleIt(fetchFunction, {default: false});
+      const toggler = ToggleIt(fetchFunction, (response) => response, {default: false});
       expect(toggler.isEnabled('feature1')).toBe(true);
     })
 
@@ -48,7 +80,7 @@ describe('.isEnabled', () => {
     })
 
     test('it returns the default given', () => {
-      const toggler = ToggleIt(async () => '{}', {default: false});
+      const toggler = ToggleIt(async () => '{}', (response) => response, {default: false});
       expect(toggler.isEnabled('feature1')).toBe(false);
     })
   })
