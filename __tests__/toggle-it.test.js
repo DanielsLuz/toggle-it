@@ -37,7 +37,7 @@ describe('.isEnabled', () => {
       const fetchFunction = () => Thenable(JSON.stringify({ feature1: true }))
 
       const toggler = ToggleIt(fetchFunction);
-      expect(toggler.isEnabled('feature1')).toBe(true);
+      expect(toggler.isEnabled('feature1', () => false)).toBe(false);
     })
   })
 
